@@ -23,12 +23,9 @@ export default function Article(props: ArticleProps) {
         if(minutes >= 1440)
             return `${Math.trunc(minutes/14400)} days ago`
         
-        if(minutes >= 60){
-            console.log("minutos: "+minutes)
-            return `${Math.trunc(minutes/60)} hours ago`
-        }
+        if(minutes >= 60)
+            return `${Math.trunc(minutes/60)} hours ago`  
             
-
         if(minutes > 0)
             return `${minutes} minutes ago`
             

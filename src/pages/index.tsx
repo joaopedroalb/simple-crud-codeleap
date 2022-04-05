@@ -7,6 +7,7 @@ import {Container,Header,BtnContainer,Title, Button} from '../styles/defaultComp
 import Login from './login'
 import Forms from '../components/Forms'
 import Article from '../components/ArticleCard'
+import axios from 'axios'
 
 type ArticleData ={
   id:number
@@ -22,10 +23,10 @@ const Home: NextPage = () => {
 
   useEffect(()=>{
     async function getArticles(){
-      const res = await fetch('https://dev.codeleap.co.uk/careers/')
-      const data = await res.json()
+      const data = await axios.get('https://dev.codeleap.co.uk/careers/').then(resp=>resp.data)
       const lst = data.results
-                  .sort((a:ArticleData,b:ArticleData)=>{return a.id - b.id})
+                  .sort((a:ArticleData,b:ArticleData)=>{return b.id - a.id })
+                  
       setLstArticle(lst)
     }
 
@@ -33,8 +34,10 @@ const Home: NextPage = () => {
   },[])
 
   const handleAdd = (article:ArticleData) =>{
+    console.log(article)
+
     if(lstArticle !== null){
-      const newLst = [...lstArticle,article]
+      const newLst = [article,...lstArticle]
       setLstArticle(newLst)
     }
 
@@ -53,7 +56,7 @@ const Home: NextPage = () => {
         </Header>
         <Forms handleAdd={handleAdd}/>
         {
-          lstArticle!=null&&[...lstArticle].reverse().map((article,index)=><Article key={index} {...article}/>)
+          lstArticle!=null&&lstArticle.map((article,index)=><Article key={index} {...article}/>)
         }
       </HomeContainer>
     </Container>

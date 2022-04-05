@@ -4,6 +4,7 @@ import InputContent from "../Input";
 import { useContext, useState } from "react";
 import { validateString } from "../../functions/validate";
 import { UsernameContext } from "../../context/UsernameContext";
+import axios from "axios";
 
 type Form = {
     title:string
@@ -26,17 +27,19 @@ export default function Forms({handleAdd}:FormProps) {
         setFormObj({...formObj,[id]:value})
     }
 
-    const handleSubmit = (e:any) =>{
+    const handleSubmit = async (e:any) =>{
         e.preventDefault()
         if(validadeForm()){
 
-            handleAdd({
-                id:1,
-                username:username,
-                created_datetime:new Date().toString(),
-                title:formObj.title,
-                content:formObj.content,
-            })
+            const articleData = await axios.post('https://dev.codeleap.co.uk/careers/',
+                                                    {
+                                                        "username":username,
+                                                        "title":formObj.title,
+                                                        "content":formObj.content
+                                                    }
+                                                ).then(resp=>resp.data)
+
+            handleAdd({...articleData})
             setFormObj({title:'',content:''})
         }
         

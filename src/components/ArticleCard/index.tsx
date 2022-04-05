@@ -1,6 +1,9 @@
-import { ArticleCard, ContentInfo, ContentTop, Paragraph, NameUser, DateText, IconContainer } from './style'
-import { Header, Title, } from '../../styles/defaultComponents'
+import { ArticleCard, ContentInfo, ContentTop, Paragraph, NameUser, DateText, IconContainer,DeleteContainer,RowButtons } from './style'
+import { BtnContainer, Header, Title, } from '../../styles/defaultComponents'
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import { useState } from 'react'
+import Modal from '../Modal'
+import axios from 'axios'
 
 type ArticleProps = {
     id: number
@@ -8,6 +11,7 @@ type ArticleProps = {
     created_datetime: string
     title: string
     content: string
+    handleDelete: any
 }
 
 export default function Article(props: ArticleProps) {
@@ -32,13 +36,26 @@ export default function Article(props: ArticleProps) {
         return "seconds ago"
     }
 
+    const [modalUpdate,setModalUpdate] = useState(false)
+    const [modalDelete,setModalDelete] = useState(false)
+
+    const stopProp = (event:any) =>{
+        event.stopPropagation()
+    }
+
+    const handleDelete = async (idArticle:number) =>{
+        await axios.delete(`http://dev.codeleap.co.uk/careers/${idArticle}/`)
+        props.handleDelete(idArticle)
+        setModalDelete(false);
+    }
+
     return (
         <ArticleCard>
             <Header>
                 <Title isArticle>{props.title}</Title>
                 <IconContainer>
-                    <FaTrash />
-                    <FaEdit />
+                    <FaTrash onClick={()=>setModalDelete(true)}/>
+                    <FaEdit onClick={()=>setModalUpdate(true)}/>
                 </IconContainer>
             </Header>
             <ContentInfo>
@@ -50,6 +67,20 @@ export default function Article(props: ArticleProps) {
                     {props.content}
                 </Paragraph>
             </ContentInfo>
+
+            <Modal active={modalUpdate} onClose={()=>setModalUpdate(false)}>
+                
+            </Modal>
+
+            <Modal active={modalDelete} onClose={()=>setModalDelete(false)}>
+                <DeleteContainer onClick={stopProp}>
+                    <p>Are you sure you want to delete this item?</p>
+                    <RowButtons>
+                        <button onClick={()=>setModalDelete(false)}>Cancel</button>
+                        <button onClick={()=>handleDelete(props.id)}>Ok</button>
+                    </RowButtons>
+                </DeleteContainer>
+            </Modal>
         </ArticleCard>
     )
 }

@@ -41,6 +41,7 @@ export const DateText = styled.h2`
 export const Paragraph = styled.p`
     width: 100%;
     text-align: left;
+    white-space: break-spaces;
 `
 
 export const IconContainer = styled.div`
@@ -61,5 +62,48 @@ export const IconContainer = styled.div`
         &:hover{
             opacity: .85;
         }
+    }
+`
+
+export const DeleteContainer = styled.div`
+    background-color: var(--white);
+    width: 661px;
+    max-width: 80%;
+    height: 168px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+
+    p{
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 25.78px;
+    }
+
+    button{
+        padding: 0.4rem;
+        width: 111px;
+        min-height: 33px;
+        border: 2px solid var(--black);
+        background: var(--white);
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 18.75px;
+        cursor: pointer;
+    }
+`
+
+export const RowButtons = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    gap: 1rem;
+
+    @media(max-width:435px){
+        justify-content:center;
     }
 `

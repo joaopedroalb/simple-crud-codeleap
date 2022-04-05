@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { Container, LoginBox, BtnContainer } from "../styles/Login";
-import { Title, Label, Input, Button } from "../styles/defaultComponents";
+import { LoginBox } from "../styles/Login";
+import {Container, BtnContainer,Title, Label, Input, Button } from "../styles/defaultComponents";
 import { useRouter } from "next/router";
 import { validateString } from "../functions/validate";
 import { UsernameContext } from "../context/UsernameContext";

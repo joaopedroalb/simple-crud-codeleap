@@ -4,6 +4,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
 import Modal from '../Modal'
 import axios from 'axios'
+import FormUpdate from '../FormUpdate'
 
 type ArticleProps = {
     id: number
@@ -12,6 +13,7 @@ type ArticleProps = {
     title: string
     content: string
     handleDelete: any
+    handleUpdate:any
 }
 
 export default function Article(props: ArticleProps) {
@@ -25,7 +27,7 @@ export default function Article(props: ArticleProps) {
         const minutes = Math.floor(ms / 60000);
 
         if(minutes >= 1440)
-            return `${Math.trunc(minutes/14400)} days ago`
+            return `${Math.trunc(minutes/1440)} days ago`
         
         if(minutes >= 60)
             return `${Math.trunc(minutes/60)} hours ago`  
@@ -69,7 +71,7 @@ export default function Article(props: ArticleProps) {
             </ContentInfo>
 
             <Modal active={modalUpdate} onClose={()=>setModalUpdate(false)}>
-                
+                <FormUpdate stopProp={stopProp} id={props.id} closeModal={()=>setModalUpdate(false)} updateList={props.handleUpdate}/>
             </Modal>
 
             <Modal active={modalDelete} onClose={()=>setModalDelete(false)}>

@@ -22,6 +22,10 @@ export const Button = styled.button`
     font-weight: 700;
     font-size: 16px;
     cursor: pointer;
+
+    &:disabled{
+        opacity: .7;
+    }
 `
 
 export const InputTextBox = styled.input`

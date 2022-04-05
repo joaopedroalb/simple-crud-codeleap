@@ -1,3 +1,4 @@
 export const validateString = (value:string|null) =>{
-    return !(!value || value.length === 0)
+    const valueWithoutSpace = value !== null ? value.replaceAll(' ',''):value 
+    return !(!valueWithoutSpace || valueWithoutSpace.length === 0)
 }

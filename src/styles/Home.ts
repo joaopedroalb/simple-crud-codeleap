@@ -9,12 +9,14 @@ export const HomeContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 2rem;
+    padding-bottom: 2rem;
 `
 
 export const FormArticle = styled.form`
     width: 723px;
     max-width: 80%;
-    margin: 2rem 0 1rem 0;
+    margin-top: .5rem;
     border: 1px solid var(--dark-gray);
     padding: 1.6rem;
     display: flex;

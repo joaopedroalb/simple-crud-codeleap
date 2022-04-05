@@ -34,6 +34,7 @@ export const Button = styled.button`
 
     &:disabled{
         opacity: .7;
+        cursor: not-allowed;
     }
 `
 

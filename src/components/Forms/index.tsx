@@ -10,7 +10,11 @@ type Form = {
     content:string
 }
 
-export default function Forms() {
+type FormProps = {
+    handleAdd:any
+}
+
+export default function Forms({handleAdd}:FormProps) {
     const [formObj, setFormObj] = useState<Form>({title:'',content:''})
     const {username} = useContext(UsernameContext)
 
@@ -25,11 +29,13 @@ export default function Forms() {
     const handleSubmit = (e:any) =>{
         e.preventDefault()
         if(validadeForm()){
-            console.log({
+
+            handleAdd({
+                id:1,
                 username:username,
+                created_datetime:new Date().toString(),
                 title:formObj.title,
-                content: formObj.content,
-                date: new Date().toLocaleString()
+                content:formObj.content,
             })
             setFormObj({title:'',content:''})
         }

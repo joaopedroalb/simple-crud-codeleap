@@ -2,9 +2,10 @@ import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     :root{
-        --black:#000
-        --white:#FFF
-        --gray:#DDD
+        --black:#000;
+        --white:#FFF;
+        --gray:#DDD;
+        --dark-gray:#777777;
     }
     html,
     body {

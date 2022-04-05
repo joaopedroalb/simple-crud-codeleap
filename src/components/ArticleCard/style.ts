@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ArticleCard = styled.article`
     width: 723px;
-    max-width: 80%;
+    max-width: 95%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -41,4 +41,25 @@ export const DateText = styled.h2`
 export const Paragraph = styled.p`
     width: 100%;
     text-align: left;
+`
+
+export const IconContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    font-size: 22px;
+
+    @media(max-width:635px){
+        font-size: 13px;
+    }
+
+    svg{
+        cursor: pointer;
+        
+        transition: 400ms;
+        &:hover{
+            opacity: .85;
+        }
+    }
 `

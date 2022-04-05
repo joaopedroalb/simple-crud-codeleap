@@ -15,7 +15,7 @@ export const HomeContainer = styled.div`
 
 export const FormArticle = styled.form`
     width: 723px;
-    max-width: 80%;
+    max-width: 95%;
     margin-top: .5rem;
     border: 1px solid var(--dark-gray);
     padding: 1.6rem;

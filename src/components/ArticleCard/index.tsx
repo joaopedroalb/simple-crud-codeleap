@@ -1,16 +1,16 @@
-import {ArticleCard,ContentInfo,ContentTop,Paragraph,NameUser,DateText} from './style'
+import {ArticleCard,ContentInfo,ContentTop,Paragraph,NameUser,DateText,IconContainer} from './style'
 import {Header,Title,} from '../../styles/defaultComponents'
+import {FaEdit,FaTrash} from 'react-icons/fa'
 
 export default function Article() {
   return (
     <ArticleCard>
         <Header>
-            
-                <Title isArticle>My First Post at CodeLeap Network!</Title>
-                <div>
-                    x y
-                </div>
-            
+            <Title isArticle>My First Post at CodeLeap Network!</Title>
+            <IconContainer>
+                <FaTrash/>
+                <FaEdit />
+            </IconContainer>
         </Header>
         <ContentInfo>
             <ContentTop>

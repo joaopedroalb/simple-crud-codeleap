@@ -11,7 +11,7 @@ type Username = {
 
 export const UsernameContext = createContext({} as Username)
 
-export default function ShinyProvider({children}:ProviderProps){
+export default function UsernameProvider({children}:ProviderProps){
     const [username,setUsername] = useState<string|null>(null)
 
 

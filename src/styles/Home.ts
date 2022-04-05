@@ -11,14 +11,6 @@ export const HomeContainer = styled.div`
     align-items: center;
 `
 
-export const Header = styled.header`
-    width: 100%;
-    background-color: var(--black);
-    padding: 27px 37px 27px 37px;
-    height: 80px;
-    color: var(--white);
-`
-
 export const FormArticle = styled.form`
     width: 723px;
     max-width: 80%;

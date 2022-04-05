@@ -1,8 +1,9 @@
 import { FormArticle, InputContainer } from "../../styles/Home";
 import { BtnContainer, Title, Button } from "../../styles/defaultComponents";
 import InputContent from "../Input";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { validateString } from "../../functions/validate";
+import { UsernameContext } from "../../context/UsernameContext";
 
 type Form = {
     title:string
@@ -11,6 +12,7 @@ type Form = {
 
 export default function Forms() {
     const [formObj, setFormObj] = useState<Form>({title:'',content:''})
+    const {username} = useContext(UsernameContext)
 
     const validadeForm = () =>{
         return (validateString(formObj.title)&&validateString(formObj.content))
@@ -23,7 +25,12 @@ export default function Forms() {
     const handleSubmit = (e:any) =>{
         e.preventDefault()
         if(validadeForm()){
-            console.log(formObj)
+            console.log({
+                username:username,
+                title:formObj.title,
+                content: formObj.content,
+                date: new Date().toLocaleString()
+            })
             setFormObj({title:'',content:''})
         }
         

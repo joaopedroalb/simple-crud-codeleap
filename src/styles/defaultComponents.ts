@@ -50,11 +50,18 @@ export const InputTextBox = styled.textarea`
     }   
 `
 
-export const Title = styled.h1`
-    margin-bottom: 1rem;
+type TitleProps = {
+    isArticle?:boolean
+}
+
+export const Title = styled.h1<TitleProps>`
     font-size: 22px;
     line-height: 25.78px;
     font-weight: 700;
+
+    @media(max-width:635px){
+        ${props=>props.isArticle&&`font-size: 13px;`}
+    }
 `
 
 export const Label = styled.label`
@@ -70,5 +77,20 @@ export const BtnContainer = styled.div`
 
     @media(max-width:435px){
         justify-content:center;
+    }
+`
+
+export const Header = styled.header`
+    width: 100%;
+    background-color: var(--black);
+    padding: 27px 37px 27px 37px;
+    height: 80px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media(max-width:635px){
+        padding: 17px;
     }
 `

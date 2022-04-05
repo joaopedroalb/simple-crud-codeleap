@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
   useEffect(()=>{
     async function getArticles(){
-      const data = await axios.get('http://dev.codeleap.co.uk/careers/?limit=20').then(resp=>resp.data)
+      const data = await axios.get('http://dev.codeleap.co.uk/careers/?limit=25').then(resp=>resp.data)
       const lst = data.results
                   .sort((a:ArticleData,b:ArticleData)=>{return b.id - a.id })
                   
@@ -52,6 +52,14 @@ const Home: NextPage = () => {
     setLstArticle(newList)
   }
 
+  const handleUpdate = (article:ArticleData) =>{
+    if(lstArticle === null) return 
+
+    const newList = [...lstArticle].map(a=>{return a.id !== article.id ? a:article})
+
+    setLstArticle(newList)
+  }
+
   if(!validateString(username))
     return <Login/>
 
@@ -63,7 +71,11 @@ const Home: NextPage = () => {
         </Header>
         <Forms handleAdd={handleAdd}/>
         {
-          lstArticle!=null&&lstArticle.map((article,index)=><Article key={index} handleDelete={handleDelete} {...article} />)
+          lstArticle!=null&&lstArticle.map((article,index)=><Article key={index} 
+                                                                    handleDelete={handleDelete} 
+                                                                    handleUpdate={handleUpdate} 
+                                                                    {...article} 
+                                                              />)
         }
       </HomeContainer>
     </Container>

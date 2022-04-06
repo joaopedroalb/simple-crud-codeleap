@@ -1,10 +1,11 @@
 import { ArticleCard, ContentInfo, ContentTop, Paragraph, NameUser, DateText, IconContainer,DeleteContainer,RowButtons } from './style'
 import {  Header, Title, } from '../../styles/defaultComponents'
 import { FaEdit, FaTrash } from 'react-icons/fa'
-import {  useState } from 'react'
+import {  useContext, useState } from 'react'
 import Modal from '../Modal'
 import FormUpdate from '../FormUpdate'
 import { useDisableBodyScroll } from '../../hooks/useDisableBodyScroll'
+import { UsernameContext } from '../../context/UsernameContext'
 
 type ArticleProps = {
     id: number
@@ -17,6 +18,7 @@ type ArticleProps = {
 }
 
 export default function Article(props: ArticleProps) {
+    const {username} = useContext(UsernameContext)
 
     const formatDate = (date: string) => {
         const dateNow = new Date()
@@ -62,10 +64,12 @@ export default function Article(props: ArticleProps) {
         <ArticleCard>
             <Header>
                 <Title isArticle>{props.title}</Title>
-                <IconContainer>
-                    <FaTrash onClick={()=>setModalDelete(true)}/>
-                    <FaEdit onClick={()=>setModalUpdate(true)}/>
-                </IconContainer>
+                {(username===props.username)&&(
+                    <IconContainer>
+                        <FaTrash onClick={()=>setModalDelete(true)}/>
+                        <FaEdit onClick={()=>setModalUpdate(true)}/>
+                    </IconContainer>
+                )}
             </Header>
             <ContentInfo>
                 <ContentTop>

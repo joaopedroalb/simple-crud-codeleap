@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
   useEffect(()=>{
     async function getArticles(){
-      const data = await axios.get('http://dev.codeleap.co.uk/careers/?limit=25').then(resp=>resp.data)
+      const data = await axios.get('https://dev.codeleap.co.uk/careers/?limit=25').then(resp=>resp.data)
       const lst = data.results
                   .sort((a:ArticleData,b:ArticleData)=>{return b.id - a.id })
                   

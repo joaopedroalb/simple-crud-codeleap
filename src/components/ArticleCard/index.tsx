@@ -46,7 +46,7 @@ export default function Article(props: ArticleProps) {
     }
 
     const handleDelete = async (idArticle:number) =>{
-        await axios.delete(`http://dev.codeleap.co.uk/careers/${idArticle}/`)
+        await axios.delete(`https://dev.codeleap.co.uk/careers/${idArticle}/`)
         props.handleDelete(idArticle)
         setModalDelete(false);
     }

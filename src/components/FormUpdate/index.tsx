@@ -37,7 +37,7 @@ export default function FormUpdate({ id, stopProp,closeModal,updateList }: FormU
     }
 
     const handleUpdate = async () =>{
-        const articleUpdated = await axios.patch(`http://dev.codeleap.co.uk/careers/${id}/`,
+        const articleUpdated = await axios.patch(`https://dev.codeleap.co.uk/careers/${id}/`,
                                             {
                                                 "title":formObj.titleUpdate,
                                                 "content":formObj.contentUpdate

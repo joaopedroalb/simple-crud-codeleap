@@ -2,12 +2,12 @@ import type { NextPage } from 'next'
 import { useContext, useEffect, useState } from 'react'
 import { UsernameContext } from '../context/UsernameContext'
 import { validateString } from '../functions/validate'
-import {HomeContainer,FormArticle,InputContainer} from '../styles/Home'
-import {Container,Header,BtnContainer,Title, Button} from '../styles/defaultComponents'
+import {HomeContainer} from '../styles/Home'
+import {Container,Header,Title} from '../styles/defaultComponents'
 import Login from './login'
 import Forms from '../components/Forms'
 import Article from '../components/ArticleCard'
-import axios from 'axios'
+import api from '../utils/api'
 
 type ArticleData ={
   id:number
@@ -22,40 +22,44 @@ const Home: NextPage = () => {
   const [lstArticle,setLstArticle] = useState<Array<ArticleData>|null>(null)
 
   useEffect(()=>{
-    async function getArticles(){
-      const data = await axios.get('https://dev.codeleap.co.uk/careers/?limit=25').then(resp=>resp.data)
+    async function handleRead(){
+      const data = await api.get("careers/?limit=25").then(res=>res.data)
       const lst = data.results
                   .sort((a:ArticleData,b:ArticleData)=>{return b.id - a.id })
                   
       setLstArticle(lst)
     }
 
-    getArticles()
+    handleRead()
   },[])
 
-  const handleAdd = (article:ArticleData) =>{
-    console.log(article)
-
+  const handleAdd = async (title:string,content:string) =>{
+    const articleData = await api.post("careers/",{"username":username,"title":title, "content":content}
+                                      ).then(resp=>resp.data)
     if(lstArticle !== null){
-      const newLst = [article,...lstArticle]
+      const newLst = [articleData,...lstArticle]
       setLstArticle(newLst)
     }
 
     if(lstArticle === null)
-      setLstArticle([article])
+      setLstArticle([articleData])
   }
 
-  const handleDelete = (id:number) =>{
+  const handleDelete = async(id:number) =>{
     if(lstArticle === null) return 
+
+    await api.delete(`careers/${id}/`)
 
     const newList = [...lstArticle].filter(article=> article.id !== id)
     setLstArticle(newList)
   }
 
-  const handleUpdate = (article:ArticleData) =>{
+  const handleUpdate = async (id:number,title:string,content:string) =>{
     if(lstArticle === null) return 
 
-    const newList = [...lstArticle].map(a=>{return a.id !== article.id ? a:article})
+    const articleUpdated = await api.patch(`careers/${id}/`,{"title":title,"content":content}    
+                                        ).then(res=>res.data)
+    const newList = [...lstArticle].map(a=>{return a.id !== articleUpdated.id ? a:articleUpdated})
 
     setLstArticle(newList)
   }

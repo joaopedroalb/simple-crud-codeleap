@@ -1,9 +1,8 @@
 import { ArticleCard, ContentInfo, ContentTop, Paragraph, NameUser, DateText, IconContainer,DeleteContainer,RowButtons } from './style'
-import { BtnContainer, Header, Title, } from '../../styles/defaultComponents'
+import {  Header, Title, } from '../../styles/defaultComponents'
 import { FaEdit, FaTrash } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import Modal from '../Modal'
-import axios from 'axios'
 import FormUpdate from '../FormUpdate'
 import { useDisableBodyScroll } from '../../hooks/useDisableBodyScroll'
 
@@ -47,7 +46,6 @@ export default function Article(props: ArticleProps) {
     }
 
     const handleDelete = async (idArticle:number) =>{
-        await axios.delete(`https://dev.codeleap.co.uk/careers/${idArticle}/`)
         setModalDelete(false);
         props.handleDelete(idArticle)
         renderModal(modalDelete)
@@ -55,7 +53,7 @@ export default function Article(props: ArticleProps) {
 
     //function to handle if delete article
     const renderModal = (bool:boolean) =>{
-        const fixRenderStatus = bool
+        if(bool) document.body.style.overflow = 'unset'
     }
 
     useDisableBodyScroll(modalUpdate||modalDelete)

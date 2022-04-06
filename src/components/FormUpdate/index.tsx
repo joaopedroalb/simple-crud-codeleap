@@ -4,7 +4,6 @@ import { BtnContainer, Title, Button } from "../../styles/defaultComponents";
 import InputContent from "../Input";
 import { useState } from "react";
 import { validateString } from "../../functions/validate";
-import axios from "axios";
 
 type FormUpdateProps = {
   id: number;
@@ -37,13 +36,9 @@ export default function FormUpdate({ id, stopProp,closeModal,updateList }: FormU
     }
 
     const handleUpdate = async () =>{
-        const articleUpdated = await axios.patch(`https://dev.codeleap.co.uk/careers/${id}/`,
-                                            {
-                                                "title":formObj.titleUpdate,
-                                                "content":formObj.contentUpdate
-                                            }    
-                                        ).then(res=>res.data)
-        updateList(articleUpdated)
+        if(validadeForm()){
+            updateList(id,formObj.titleUpdate,formObj.contentUpdate)
+        }
     }
 
     return (

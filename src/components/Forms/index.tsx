@@ -1,10 +1,9 @@
 import { FormArticle, InputContainer } from "../../styles/Home";
 import { BtnContainer, Title, Button } from "../../styles/defaultComponents";
 import InputContent from "../Input";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { validateString } from "../../functions/validate";
-import { UsernameContext } from "../../context/UsernameContext";
-import axios from "axios";
+
 
 type Form = {
     title:string
@@ -17,7 +16,6 @@ type FormProps = {
 
 export default function Forms({handleAdd}:FormProps) {
     const [formObj, setFormObj] = useState<Form>({title:'',content:''})
-    const {username} = useContext(UsernameContext)
 
     const validadeForm = () =>{
         return (validateString(formObj.title)&&validateString(formObj.content))
@@ -30,16 +28,7 @@ export default function Forms({handleAdd}:FormProps) {
     const handleSubmit = async (e:any) =>{
         e.preventDefault()
         if(validadeForm()){
-
-            const articleData = await axios.post('https://dev.codeleap.co.uk/careers/',
-                                                    {
-                                                        "username":username,
-                                                        "title":formObj.title,
-                                                        "content":formObj.content
-                                                    }
-                                                ).then(resp=>resp.data)
-
-            handleAdd({...articleData})
+            handleAdd(formObj.title,formObj.content)
             setFormObj({title:'',content:''})
         }
         
